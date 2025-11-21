@@ -33,6 +33,11 @@ jobs:
           mkdir -p out
           touch out/.nojekyll
 
+      - name: Copiar JSONs para pasta out
+        run: |
+          test -f home.json && cp home.json out/home.json || (echo "home.json não encontrado" && exit 1)
+          test -f away.json && cp away.json out/away.json || (echo "away.json não encontrado" && exit 1)
+
       - name: Deploy to 'deploy' branch
         uses: JamesIves/github-pages-deploy-action@v4
         with:
